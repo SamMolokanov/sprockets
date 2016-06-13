@@ -243,7 +243,7 @@ module Sprockets
 
         # If there are any processors to run on the pathname, use
         # `BundledAsset`. Otherwise use `StaticAsset` and treat is as binary.
-        if attributes_for(pathname).processors.any?
+        if attributes_for(pathname).processors.any? && !pathname.to_s.end_with?('min.js')
           if options[:bundle] == false
             circular_call_protection(pathname.to_s) do
               ProcessedAsset.new(index, logical_path, pathname)
